@@ -12,10 +12,10 @@ class TestBasicDCAnalysis(unittest.TestCase):
     def test_nand2(self):
         nl = DigitalCircuitAnalysis.Netlist()
         nl.add_spice("""
-            MN1   n A VSS x nmos
-            MN2 out B   n x nmos
-            MP1 out A VDD x pmos
-            MP2 out B VDD x pmos
+            MN1   n A VSS VSS nmos
+            MN2 out B   n VSS nmos
+            MP1 out A VDD VDD pmos
+            MP2 out B VDD VDD pmos
             """)
         table = nl.truth_table(['A','B'], ['out'])
         s = "\n".join(table)
@@ -25,10 +25,10 @@ class TestBasicDCAnalysis(unittest.TestCase):
     def test_nor2(self):
         nl = DigitalCircuitAnalysis.Netlist()
         nl.add_spice("""
-            MN1 out A VSS x nmos
-            MN2 out B VSS x nmos
-            MP1 out A   n x pmos
-            MP2   n B VDD x pmos
+            MN1 out A VSS VSS nmos
+            MN2 out B VSS VSS nmos
+            MP1 out A   n VDD pmos
+            MP2   n B VDD VDD pmos
             """)
         table = nl.truth_table(['A','B'], ['out'])
         s = "\n".join(table)
